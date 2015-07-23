@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var args = require('yargs').argv;
+var browserSync = require('browser-sync');
 var config = require('./gulp.config')();
 var del = require('del');
 var $ = require('gulp-load-plugins')({lazy: true});
@@ -57,6 +58,7 @@ gulp.task('serve-dev', ['less-watcher'], function() {
 		})
 		.on('start', function() {
 			log('*** nodemon started');
+			startBrowserSync();
 		})
 		.on('crash', function() {
 			log('*** nodemon crashed: script crashes for some reason');
@@ -67,6 +69,46 @@ gulp.task('serve-dev', ['less-watcher'], function() {
 });
 
 /////////////
+
+function changeEvent(event) {
+	var srcPattern = new RegExp('/.*(?=/' + config.source + ')/');
+	log('File' + event.path.replace(srcPattern, '') + ' ' + event.type);
+}
+
+function startBrowserSync() {
+	if (browserSync.active) {
+		return;
+	}
+
+	log('Starting browser-sync on port ' + port);
+
+	gulp.watch([config.less], ['styles'])
+		.on('change', function(event) { changeEvent(event); });
+
+	var options = {
+		proxy: 'localhost:' + port,
+		port: 3000,
+		files: [
+			config.client + '**/*.*',
+			'!' + config.less,
+			config.temp + '**/*.css'
+		],
+		ghostNode: {
+			clicks: true,
+			location: false,
+			forms: true,
+			scroll: true
+		},
+		injectChanges: true,
+		logFileChanges: true,
+		logLevel: 'debug',
+		logPrefix: 'gulp-patterns',
+		notify: true,
+		reloadDelay: 0
+	};
+
+	browserSync(options);
+}
 
 function clean(path, done) {
 	log('Cleaning ' + $.util.colors.blue(path));
