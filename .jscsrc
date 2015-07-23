@@ -1,0 +1,19 @@
+{
+	"requireSpaceBetweenArguments": true,
+	"requireCurlyBraces": [
+    	"do"
+	],
+    "requireSpaceAfterKeywords": [
+        "if",
+        "else",
+        "for",
+        "while",
+        "do",
+        "switch",
+        "case",
+        "return",
+        "try",
+        "catch",
+        "typeof"
+    ]
+}
