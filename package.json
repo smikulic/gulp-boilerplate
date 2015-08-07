@@ -5,7 +5,7 @@
     "Sinisa Mikulic"
   ],
   "reference": "https://github.com/johnpapa/pluralsight-gulp/blob/master/src/server/app.js",
-  "homepage": "git@github.com:smikulic/gulp-boilerplate.git",
+  "homepage": "https://git@github.com:smikulic/gulp-boilerplate.git",
   "repository": {
     "type": "git",
     "url": "git@github.com:smikulic/gulp-boilerplate.git"
@@ -16,6 +16,7 @@
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.3.0",
     "gulp-jscs": "^1.6.0",
     "gulp-jshint": "^1.11.2",
     "gulp-less": "^3.0.3",
@@ -23,6 +24,7 @@
     "gulp-nodemon": "^2.0.3",
     "gulp-plumber": "^1.0.1",
     "gulp-print": "^1.1.0",
+    "gulp-task-listing": "^1.0.1",
     "gulp-util": "^3.0.6",
     "jshint-stylish": "^2.0.1",
     "yargs": "^3.15.0"

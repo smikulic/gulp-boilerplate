@@ -6,6 +6,10 @@ var del = require('del');
 var $ = require('gulp-load-plugins')({lazy: true});
 var port = process.env.PORT || config.defaultPort;
 
+gulp.task('help', $.taskListing);
+
+gulp.task('default', ['help']);
+
 gulp.task('vet', function() {
 	log('Gulp analysis!');
 
@@ -27,6 +31,14 @@ gulp.task('styles', ['clean-styles'], function() {
 		.pipe($.less())
 		.pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
 		.pipe(gulp.dest(config.temp));
+});
+
+gulp.task('fonts', function() {
+	log('Copying fonts');
+
+	return gulp
+		.src(config.fonts)
+		.pipe(gulp.dest(config.build + 'fonts'));
 });
 
 gulp.task('clean-styles', function(done) {
@@ -55,6 +67,10 @@ gulp.task('serve-dev', ['less-watcher'], function() {
 		.on('restart', function(ev) {
 			log('*** nodemon restarted');
 			log('files changed on restart:\n' + ev);
+			setTimeout(function() {
+				browserSync.notify('relaoding now ...');
+				browserSync.reload({stream: false});
+			}, config.browserReloadDelay);
 		})
 		.on('start', function() {
 			log('*** nodemon started');

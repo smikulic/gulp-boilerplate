@@ -10,9 +10,16 @@ module.exports = function() {
 			'./src/**/*.js',
 			'./*.js'
 		],
+		build: './build/',
+		fonts: client + 'fonts/*.*',
 		less: client + 'styles/styles.less',
 		server: server,
 		temp: './.tmp/',
+
+		/**
+		 * Browser sync
+		 */
+		 browserReloadDelay: 1000,
 
 		/**
 		 * Node settings
