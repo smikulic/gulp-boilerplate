@@ -11,7 +11,9 @@ module.exports = function() {
 			'./*.js'
 		],
 		build: './build/',
-		fonts: client + 'fonts/*.*',
+		fonts: client + 'fonts/**/*.*',
+		images: client + 'images/**/*.*',
+		index: client + 'index.html',
 		less: client + 'styles/styles.less',
 		server: server,
 		temp: './.tmp/',
