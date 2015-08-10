@@ -14,6 +14,7 @@ module.exports = function() {
 		fonts: client + 'fonts/**/*.*',
 		images: client + 'images/**/*.*',
 		index: client + 'index.html',
+		js: client + 'js/App.js',
 		less: client + 'styles/styles.less',
 		server: server,
 		temp: './.tmp/',

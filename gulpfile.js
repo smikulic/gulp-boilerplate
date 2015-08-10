@@ -22,13 +22,24 @@ gulp.task('vet', function() {
 		.pipe($.jshint.reporter('fail'));
 });
 
+gulp.task('scripts', ['clean-scripts'], function() {
+	log('Copying & optimizing JS');
+
+	return gulp
+		.src(config.js)
+		.pipe($.plumber())
+		.pipe($.uglify())
+		.pipe(gulp.dest(config.temp));
+});
+
 gulp.task('styles', ['clean-styles'], function() {
-	log('Compiling Less --> CSS');
+	log('Compiling Less --> CSS & optimizing CSS');
 
 	return gulp
 		.src(config.less)
 		.pipe($.plumber())
 		.pipe($.less())
+		.pipe($.csso())
 		.pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
 		.pipe(gulp.dest(config.temp));
 });
@@ -62,6 +73,10 @@ gulp.task('clean', function(done) {
 	var delconfig = [].concat(config.build, config.temp);
 	log('cleaning: ' + $.util.colors.blue(delconfig));
 	del(delconfig, done);
+});
+
+gulp.task('clean-scripts', function(done) {
+	clean(config.temp + '**/*.js', done);
 });
 
 gulp.task('clean-styles', function(done) {
